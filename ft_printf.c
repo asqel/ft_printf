@@ -6,7 +6,7 @@
 /*   By: axlleres <axlleres@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 17:22:08 by axlleres          #+#    #+#             */
-/*   Updated: 2024/11/14 20:24:08 by axlleres         ###   ########.fr       */
+/*   Updated: 2024/12/12 17:14:31 by axlleres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,24 @@
 #include <stdint.h>
 #include "src/private_ftprintf.h"
 
-int ft_do_format(char c, va_list args) {
-	uintptr_t ptr;
+int	ft_do_format(char c, va_list args)
+{
+	uintptr_t	ptr;
 
-	if (c ==  's')
+	if (c == 's')
 		return (ft_pr_putstr(va_arg(args, char *)));
 	else if (c == 'c')
 		return (ft_pr_putc((char)va_arg(args, int)));
 	else if (c == 'd' || c == 'i')
-		return ft_pr_putnbr(va_arg(args, int));
+		return (ft_pr_putnbr(va_arg(args, int)));
 	else if (c == 'u')
 		return (ft_pr_put_u(va_arg(args, unsigned int)));
 	else if (c == 'x')
 		return (ft_pr_put_x(va_arg(args, unsigned int), 0));
 	else if (c == 'X')
 		return (ft_pr_put_x(va_arg(args, unsigned int), 1));
-	else if (c == 'p') {
+	else if (c == 'p')
+	{
 		ptr = (uintptr_t)va_arg(args, void *);
 		if (ptr == 0)
 			return (ft_pr_putstr("(nil)"));
@@ -44,8 +46,8 @@ int ft_do_format(char c, va_list args) {
 
 int	ft_printf(const char *fmt, ...)
 {
-	va_list args;
-	int	count;
+	va_list	args;
+	int		count;
 
 	count = 0;
 	va_start(args, fmt);
@@ -60,7 +62,8 @@ int	ft_printf(const char *fmt, ...)
 			fmt++;
 			fmt++;
 		}
-		else {
+		else
+		{
 			count++;
 			write(1, fmt, 1);
 			fmt++;
